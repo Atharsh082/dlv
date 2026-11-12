@@ -1,0 +1,170 @@
+13. Python Program to Implement a Generative Model for Image Editing
+1. Aim
+To write and execute a Python program to implement a generative model for image editing using a pre-trained Stable Diffusion Inpainting model.
+2. Procedure
+1. Install the required Python libraries.
+2. Import the necessary libraries such as PyTorch, Diffusers and PIL.
+3. Load the input image and mask image.
+4. Load the pre-trained Stable Diffusion Inpainting model.
+5. Give a text prompt describing the required image modification.
+6. Generate the edited image using the generative model.
+7. Display and save the generated image.
+8. Verify the output.
+3. Required Installation
+Open the VS Code terminal and execute:
+pip install torch torchvision
+pip install diffusers transformers accelerate safetensors pillow
+
+
+4. Python Program
+Create a file named image_editing.py.
+import torchfrom diffusers import StableDiffusionInpaintPipelinefrom PIL import Image# Load input imageimage = Image.open("input.jpg").convert("RGB")mask = Image.open("mask.png").convert("RGB")# Resize imagesimage = image.resize((512, 512))mask = mask.resize((512, 512))# Load generative modelpipe = StableDiffusionInpaintPipeline.from_pretrained(    "stable-diffusion-2-inpainting",    torch_dtype=torch.float16 if torch.cuda.is_available()    else torch.float32)# Select devicedevice = "cuda" if torch.cuda.is_available() else "cpu"pipe = pipe.to(device)# Image editing promptprompt = "A beautiful garden with colorful flowers"# Generate edited imageresult = pipe(    prompt=prompt,    image=image,    mask_image=mask,    num_inference_steps=30,    guidance_scale=7.5).images[0]
+
+
+
+5. Input Images
+- input.jpg – Original image.
+- mask.png – Mask image indicating the area to be edited. White represents the editing area and black represents the area to preserve.
+6. Output
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Expected Output:
+Image editing completed successfully!
+Edited image saved as edited_image.png
+
+
+7. Result
+Thus, the Python program to implement a generative model for image editing using Stable Diffusion Inpainting was successfully implemented and executed.
